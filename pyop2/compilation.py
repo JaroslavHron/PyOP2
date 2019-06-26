@@ -233,6 +233,7 @@ class Compiler(object):
         hsh.update("".join(self._ldargs).encode())
 
         basename = hsh.hexdigest()
+        print("Disk " + str(jitmodule.cache_key[0]) + " " + basename)
 
         cachedir = configuration['cache_dir']
 
@@ -264,6 +265,7 @@ class Compiler(object):
             return ctypes.CDLL(soname)
         except OSError:
             # No, let's go ahead and build
+            print("Compiling " + dirpart + basename)
             if self.comm.rank == 0:
                 # No need to do this on all ranks
                 os.makedirs(cachedir, exist_ok=True)

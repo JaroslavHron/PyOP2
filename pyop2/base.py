@@ -3780,7 +3780,7 @@ class ParLoop(LazyComputation):
     @collective
     def compute(self):
         """Executes the kernel over all members of the iteration space."""
-        with timed_region("ParLoopExecute"):
+        with timed_region("ParLoopExecute_" + self.kernel.cache_key):
             orig_lgmaps = []
             for arg in self.args:
                 if arg._is_mat and arg.lgmaps is not None:
